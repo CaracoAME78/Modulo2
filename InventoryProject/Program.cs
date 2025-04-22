@@ -1,4 +1,6 @@
-﻿namespace InventoryProject
+﻿using InventoryProject.Modelos;
+
+namespace InventoryProject
 {
     internal class Program
     {
@@ -63,5 +65,29 @@
             }
 
         }
-    }
+
+        static void CargarDatosIniciales (SistemaInventario sistema)
+        {
+            // Agregar tipos de Empleados
+            var tipoAdmin = new TipoEmpleado { Nombre = "Administrador", Descripcion = "Acceso total del sistema" };
+            var tipoAlmacen = new TipoEmpleado { Nombre = "Almacenero", Descripcion = "Acceso Gestión del Almacen" };
+            var tipoVendedor = new TipoEmpleado { Nombre = "Vendedor", Descripcion = "Acceso Gestión venta" };
+
+            sistema.AgregarTipoEmpleado(tipoAdmin);
+            sistema.AgregarTipoEmpleado(tipoAlmacen);
+            sistema.AgregarTipoEmpleado(tipoVendedor);
+
+            // Agregar los empleados
+
+            var empleado1 = new TipoEmpleado { 
+                Nombres = "Andre Antoni", 
+                TipoEmpleado = tipoAdmin, 
+                Estado =EstadoEmpleado.ACTIVO, 
+                FechaIngreso= new DateTime(1900,1,1),
+                Edad =29;
+
+                
+            };
+
+        }
 }
