@@ -50,7 +50,7 @@
                 catch (Exception ex) //throw on error
                 {
 
-                    throw;
+                    Console.Writeline(ex.Message);
                 }
 
 
