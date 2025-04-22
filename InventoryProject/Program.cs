@@ -23,25 +23,29 @@
                 Console.WriteLine("0. Salir");
 
                 Console.WriteLine("\n Seleccione una opción: ");
-                String opcion = Console.ReadLine();
-
+                
                 try
                 {
+                    int opcion = int.Parse(Console.ReadLine());
+
                     switch (opcion)
                     {
-                        case "1":
+                        case 1:
                             GestionEmpleados(sistema);
                             break;
-                        case "2":
+                        case 2:
                             GestionProductos(sistema);
                             break;
-                        case "3":
+                        case 3:
                             MovimientosStock(sistema);
                             break;
-                        case "4":
+                        case 4:
                             MostrarReportes(sistema);
                             break;
-                        case "0":
+                        case 0:
+                            salir = true;
+                            break;
+                        default:
                             Console.WriteLine("Opción Invalida");
                             break;
                     }
@@ -50,7 +54,8 @@
                 catch (Exception ex) //throw on error
                 {
 
-                    Console.Writeline(ex.Message);
+                    Console.WriteLine(ex.Message);  // IndexOutOfRangeException //in Internet
+
                 }
 
 
