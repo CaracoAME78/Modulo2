@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace InventoryProject.Modelos
 {
-    public enum CategoriaProducto
+    public enum EstadoEmpleado
     {
-        LAPTOPS,
-        TECLADOS,
-        MONITORES,
-        PLACAS,
-        PROCESADORES,
-        TARJETAGRAFICA
+        ACTIVO,
+        INACTIVO
     }
 }

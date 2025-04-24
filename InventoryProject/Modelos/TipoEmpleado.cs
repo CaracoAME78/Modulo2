@@ -11,12 +11,13 @@ namespace InventoryProject.Modelos
         private static int _nextId = 1;
 
         public int Id { get; private set; }
-        public string Nombre { get;  set; }
-        public string Descripcion { get;  set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
 
-        public TipoEmpleado() {
-
+        public TipoEmpleado()
+        {
             Id = _nextId++;
         }
+
     }
 }

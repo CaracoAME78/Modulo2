@@ -9,28 +9,45 @@ namespace InventoryProject
 {
     internal class SistemaInventario
     {
-        private List<TipoEmpleado> _tiposEmpleados =  new List<TipoEmpleado> ();
-        private List<Empleado> _empleados = new List<Empleado> () ;
+        private List<TipoEmpleado> _tiposEmpleados = new List<TipoEmpleado>();
+        private List<Empleado> _empleados = new List<Empleado>();
         private List<Producto> _productos = new List<Producto>();
-        private List<MovimientoStock> _movimientos = new List<MovimientoStock> () ;
-        
-        // Metodo para agregar un tipo de empleado
-        public void AgregarTipoEmpleado (TipoEmpleado tipoEmpleado)
+        private List<MovimientoStock> _movimientos = new List<MovimientoStock>();
+
+        // Metodo para agregar un tipo empleado
+        public void AgregarTipoEmpleado(TipoEmpleado tipoEmpleado)
         {
-            _tiposEmpleados.Add (tipoEmpleado);
+            _tiposEmpleados.Add(tipoEmpleado);
         }
 
         // Metodo para listar todos los tipos de empleados
         public List<TipoEmpleado> ObtenerTipoEmpleados()
         {
-            return _tiposEmpleados.ToList ();
+            return _tiposEmpleados.ToList();
         }
 
-        // Metodo para obtener un solo empleado y quiero que sea por ID
+        // Metodo para obtener un solo empleado y quiero que sea por Id
         public TipoEmpleado ObtenerTipoEmpleadoPorId(int id)
         {
-            return _tiposEmpleados.FirstOrDefault(t=> t.Id = id);
+            return _tiposEmpleados.FirstOrDefault(t => t.Id == id);
         }
+
+        public void AgregarEmpleado(Empleado empleado)
+        {
+            _empleados.Add(empleado);
+        }
+
+        public List<Empleado> ObtenerEmpleados()
+        {
+            return _empleados.ToList();
+        }
+
+        public Empleado ObtenerEmpleadoPorId(int id)
+        {
+            return _empleados.FirstOrDefault(t => t.Id == id);
+        }
+
+        // Agregar el resto de metodos
 
     }
 }
