@@ -7,49 +7,50 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Repositories
 {
-    internal class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
-        private List<Customer> _customers = new List<Customer>;
+        private List<Customer> _customers = new List<Customer>();
         private int _nextId = 1;
 
-         void IRepository<Customer>.Add(Customer entity)
-        {
-            entity.Id = ++_nextId;
-        }
-
-         void IRepository<Customer>.Delete(Customer entity)
-        {
-            _customers.Remove(entity);
-        }
-
-         List<Customer> IRepository<Customer>.GetAll()
+        public List<Customer> GetAll()
         {
             return _customers;
         }
 
-         Customer ICustomerRepository.GetByEmail(string email)
+        public Customer GetById(int id)
         {
-            throw new NotImplementedException();
+            return _customers.FirstOrDefault(x => x.Id == id);
         }
 
-         Customer IRepository<Customer>.GetById(int id)
+        public void Add(Customer entity)
         {
-            return _customers.FirstOrDefault(x=>x, id= id);
+            entity.Id = _nextId++;
+            _customers.Add(entity);
         }
 
-         Customer ICustomerRepository.GetByPhoneNumber(string phoneNumber)
+        public void Update(Customer entity)
         {
-            return _customers.FirstOrDefault(x => x, phoneNumber == phoneNumber);
-        }
+            var index = _customers.FindIndex(x => x.Id == entity.Id);
 
-         void IRepository<Customer>.Update(Customer entity)
-        {
-            var index = _customers.FindIndex(x => x, Id = id);
             if (index != -1)
             {
                 _customers[index] = entity;
             }
+        }
 
+        public void Delete(Customer entity)
+        {
+            _customers.Remove(entity);
+        }
+
+        public Customer GetByPhoneNumber(string phoneNumber)
+        {
+            return _customers.FirstOrDefault(x => x.PhoneNumber == phoneNumber);
+        }
+
+        public Customer GetByEmail(string email)
+        {
+            return _customers.FirstOrDefault(x => x.Email == email);
         }
     }
 }

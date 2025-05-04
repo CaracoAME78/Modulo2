@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Repositories
 {
-    internal interface ITableRepository : IRepository<Table>
+    public interface ITableRepository : IRepository<Table>
     {
         List<Table> GetAvailableTables(DateTime date, int partySize);
     }

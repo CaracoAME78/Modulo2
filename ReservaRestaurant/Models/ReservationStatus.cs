@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Models
 {
-    internal enum ReservationStatus
+    public enum ReservationStatus
     {
-        Pendient,
-        Confirmade,
+        Pending,
+        Confirmed,
+        Cancelled,
+        Completed
     }
 }

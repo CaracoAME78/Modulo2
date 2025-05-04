@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Repositories
 {
-    internal interface ICustomerRepository : IRepository <Customer>
-    {   
+    public interface ICustomerRepository : IRepository<Customer>
+    {
         Customer GetByPhoneNumber(string phoneNumber);
         Customer GetByEmail(string email);
-
     }
 }

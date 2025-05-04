@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Repositories
 {
-    internal interface IReservationRepository : IRepository<Reservation>
+    public interface IReservationRepository : IRepository<Reservation>
     {
-        List<Reservation> GetReservationByDate(DateTime date);
-        List<Reservation> GetReservationByCustomer(string customerId);
+        List<Reservation> GetReservationsByDate(DateTime date);
+        List<Reservation> GetReservationsByCustomer(int customerId);
     }
 }

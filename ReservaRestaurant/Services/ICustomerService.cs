@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Services
 {
-    internal interface ICustomerService
+    public interface ICustomerService
     {
-        Customer GetCustumerById(int id);
-        List<Customer> GetAll();
+        Customer GetOrCreateCustomer(string name, string phone, string email);
+        Customer GetCustomerById(int id);
+        List<Customer> GetCustomers();
+        Customer GetCustomerByEmail(string email);
+        List<Reservation> GetCustomerReservations(int customerId);
     }
 }

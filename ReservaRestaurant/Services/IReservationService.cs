@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ReservaRestaurant.Services
 {
-    internal interface IReservationService
+    public interface IReservationService
     {
-        bool CreateResevation(Reservation reservation);
-        bool UpdateResevation(Reservation reservation);
-        bool DeleteResevation(Reservation reservation);
-        List<Reservation> GetAllReservationsByDate(DateTime date);
+        bool CreateReservation(Reservation reservation);
+        bool UpdateReservation(Reservation reservation);
+        bool CancelReservation(Reservation reservation);
+        List<Reservation> GetReservationsByDate(DateTime date);
         Reservation GetReservationById(int id);
     }
 }
