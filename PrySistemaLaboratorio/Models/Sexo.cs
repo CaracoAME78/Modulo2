@@ -9,6 +9,7 @@ namespace PrySistemaLaboratorio.Models
     internal enum Sexo
     {
         Masculino,
-        Femenino
+        Femenino,
+        Otro
     }
 }
