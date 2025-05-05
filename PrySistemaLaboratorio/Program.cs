@@ -15,9 +15,10 @@ namespace PrySistemaLaboratorio
             // Inicializar el sistema
             // Las interfaces no tienen la capacidad de crear instancias
             var pacienteService = new PacienteService(new PacienteRepositorio());
+            var medicoService = new MedicoService(new MedicoRepositorio());
             
             // Inicializar nuestra UI (Consola)
-            var ui = new ConsoleUI(pacienteService);
+            var ui = new ConsoleUI(pacienteService, medicoService);
 
             // Inicializar nuestra aplicacion
             ui.Run();

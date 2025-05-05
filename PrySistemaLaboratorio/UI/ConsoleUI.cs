@@ -12,11 +12,13 @@ namespace PrySistemaLaboratorio.UI
     internal class ConsoleUI
     {
         private IPacienteService _pacienteService;
+        private readonly IMedicoService _medicoService;
         private bool _isRuning = true;
 
-        public ConsoleUI(IPacienteService pacienteService)
+        public ConsoleUI(IPacienteService pacienteService, IMedicoService medicoService)
         {
             _pacienteService = pacienteService;
+            _medicoService = medicoService;
         }
 
         public void Run()
@@ -211,11 +213,10 @@ namespace PrySistemaLaboratorio.UI
             }
             else
             {
-                Console.Write("El paciente no se encontro bajo este criterio.");
+                Console.Write("Los pacientes no se encontraron bajo este criterio.");
             }
             Console.ReadKey();
 
-            
 
         }
 
