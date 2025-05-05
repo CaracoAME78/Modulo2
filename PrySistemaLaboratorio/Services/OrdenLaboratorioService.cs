@@ -51,5 +51,5 @@ namespace PrySistemaLaboratorio.Services
         {
             return _ordenLaboratorioRepositorio.GetOrdenLaboratorioByServicio(servicio, fecha);
         }
-    }
+    } 
 }
