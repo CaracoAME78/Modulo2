@@ -17,6 +17,21 @@ namespace PrySistemaLaboratorio.Services
             this._pacienteRepositorio = pacienteRepositorio;
         }
 
+        public bool CrearPaciente(Paciente paciente)
+        {
+            try
+            {
+                _pacienteRepositorio.Add(paciente);
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
         public Paciente GetPacienteByDni(string dni)
         {
             return _pacienteRepositorio.GetByDni(dni);

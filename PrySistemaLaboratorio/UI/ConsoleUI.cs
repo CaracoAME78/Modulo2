@@ -175,7 +175,17 @@ namespace PrySistemaLaboratorio.UI
             Console.Write("Correo Electrónico: ");
             _paciente.Correo = Console.ReadLine();
 
-            
+            var confirmation = _pacienteService.CrearPaciente(_paciente);
+
+            if (confirmation)
+            {
+                Console.WriteLine($"Paciente fue creado satisfactoriamente!  ID: {_paciente.Id}");
+            }
+            else
+            {
+                Console.WriteLine("Paciente no fue creado - Ocurrio un Error.");
+            }
+
         }
 
         private void DispalMenuPrincipal()
