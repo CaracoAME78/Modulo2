@@ -107,6 +107,121 @@ namespace PrySistemaLaboratorio.UI
             }
         }
 
+        private void ListarOrdenesPorServicioFecha()
+        {
+            Console.Clear();
+            Console.WriteLine("Listar Ordenes por Servicio y Fecha");
+            Console.WriteLine("===================================");
+            Console.WriteLine("");
+            Console.WriteLine("Seleccione el Servicio:");
+            foreach (var servicio in Enum.GetValues(typeof(Servicio)))
+            {
+                Console.WriteLine($"{(int)servicio}. {servicio}");
+            }
+
+            if (!int.TryParse(Console.ReadLine(), out int servicioSeleccionado) || !Enum.IsDefined(typeof(Servicio), servicioSeleccionado))
+            {
+                Console.WriteLine("Servicio no válido.");
+                return;
+            }
+
+            Servicio servicio = (Servicio)servicioSeleccionado;
+
+            Console.Write("Ingrese la fecha (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
+            {
+                Console.WriteLine("Fecha inválida.");
+                return;
+            }
+
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByServicio(servicio, fecha);
+            if (_ordenes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Ordenes por Servicio y Fecha");
+                Console.WriteLine("=====================================");
+                ImprimirTitulosOrden();
+                foreach (var orden in _ordenes)
+                {
+                    Console.WriteLine(orden);
+                }
+            }
+            else
+            {
+                Console.Write("Los pacientes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+
+        }
+
+        private void ListarOrdenesPorAreaFecha()
+        {
+            Console.Clear();
+            Console.WriteLine("Listar Ordenes por Area y Fecha");
+            Console.WriteLine("=====================");
+            Console.WriteLine("");
+            Console.WriteLine("Seleccione el área:");
+            foreach (var area in Enum.GetValues(typeof(Area)))
+            {
+                Console.WriteLine($"{(int)area}. {area}");
+            }
+
+            if (!int.TryParse(Console.ReadLine(), out int areaSeleccionada) || !Enum.IsDefined(typeof(Area), areaSeleccionada))
+            {
+                Console.WriteLine("Área no válida.");
+                return;
+            }
+
+            Area area = (Area)areaSeleccionada;
+
+            Console.Write("Ingrese la fecha (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
+            {
+                Console.WriteLine("Fecha inválida.");
+                return;
+            }
+
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByArea(area, fecha);
+            if (_ordenes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Ordenes por Area y Fecha");
+                Console.WriteLine("=================================");
+                ImprimirTitulosOrden();
+                foreach (var orden in _ordenes)
+                {
+                    Console.WriteLine(orden);
+                }
+            }
+            else
+            {
+                Console.Write("Los pacientes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+
+        }
+
+        private void BuscarOrdenPorId()
+        {
+            Console.Clear();
+            Console.WriteLine("Buscar Orden por ID");
+            Console.WriteLine("=====================");
+            Console.WriteLine("");
+            Console.Write("Ingrese ID de la Orden a listar: ");
+            string id = Console.ReadLine();
+            OrdenLaboratorio _ordenLaboratorio = _ordenLaboratorioService.GetOrdenLaboratorioById(id);
+            if (_ordenLaboratorio != null)
+            {
+                ImprimirTitulosOrden();
+                Console.Write(_ordenLaboratorio.ToString());
+            }
+            else
+            {
+                Console.Write("La Orden no se encontro bajo este criterio.");
+            }
+            Console.ReadKey();
+        }
+
         private void AgregarOrdenLaboratorio()
         {
             Console.WriteLine("=== Registro de Orden de Laboratorio ===")
