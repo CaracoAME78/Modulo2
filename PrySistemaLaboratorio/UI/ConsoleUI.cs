@@ -11,14 +11,17 @@ namespace PrySistemaLaboratorio.UI
 {
     internal class ConsoleUI
     {
-        private IPacienteService _pacienteService;
+        private readonly IPacienteService _pacienteService;
         private readonly IMedicoService _medicoService;
+        private readonly IOrdenLaboratorioService _ordenLaboratorioService;
+       
         private bool _isRuning = true;
 
-        public ConsoleUI(IPacienteService pacienteService, IMedicoService medicoService)
+        public ConsoleUI(IPacienteService pacienteService, IMedicoService medicoService, IOrdenLaboratorioService ordenLaboratorioService )
         {
             _pacienteService = pacienteService;
             _medicoService = medicoService;
+            _ordenLaboratorioService = ordenLaboratorioService; 
         }
 
         public void Run()
@@ -102,6 +105,84 @@ namespace PrySistemaLaboratorio.UI
                         break;
                 }
             }
+        }
+
+        private void AgregarOrdenLaboratorio()
+        {
+            Console.WriteLine("=== Registro de Orden de Laboratorio ===")
+            Console.WriteLine();
+            Console.WriteLine("Fecha de Registro : " + DateTime.Today.ToString());
+            Console.Write("Ingrese DNI del paciente: ");
+            string dni = Console.ReadLine();
+            var paciente = _pacienteService.GetPacienteByDni(dni);
+
+            if (paciente == null)
+            {
+                Console.WriteLine("Paciente no encontrado.");
+                return;
+            }
+
+            Console.WriteLine("Seleccione el área:");
+            foreach (var area in Enum.GetValues(typeof(Area)))
+                Console.WriteLine($"{(int)area}. {area}");
+
+            Area areaSeleccionada = (Area)int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Seleccione el servicio:");
+            foreach (var serv in Enum.GetValues(typeof(Servicio)))
+                Console.WriteLine($"{(int)serv}. {serv}");
+
+            Servicio servicioSeleccionado = (Servicio)int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Seleccione un médico:");
+            var medicos = _medicoService.GetMedicos();
+            foreach (var med in medicos)
+                Console.WriteLine($"{med.Id}. {med.Nombres} {med.ApellidoPaterno} {med.ApellidoMaterno}");
+
+            String idMedico = Console.ReadLine();
+            var medicoSeleccionado = medicos.FirstOrDefault(x => x.Id == idMedico);
+
+            Console.Write("Ingrese la fecha de programación (yyyy-mm-dd): ");
+            DateTime.TryParse(Console.ReadLine(), out DateTime fechaProgramada);
+
+            Console.WriteLine("Seleccione exámenes (separados por coma):");
+            foreach (var ex in Enum.GetValues(typeof(Examen)))
+                Console.WriteLine($"{(int)ex}. {ex}");
+
+            var examenesInput = Console.ReadLine().Split(',');
+            var examenesSeleccionados = examenesInput.Select(e => (Examen)int.Parse(e)).ToList();
+
+            Console.Write("Observación: ");
+            string observacion = Console.ReadLine();
+
+            var orden = new OrdenLaboratorio
+            {
+                IdPaciente = paciente.Id,
+                FechaProgramada = fechaProgramada,
+                Area = areaSeleccionada,
+                Servicio = servicioSeleccionado,
+                IdMedico = medicoSeleccionado.Id,
+                Examenes = examenesSeleccionados,
+                Observacion = observacion
+            };
+
+            _ordenLaboratorioService.CrearOrden(orden);
+            MostrarResumenOrden(orden);
+
+        }
+
+        private void MostrarResumenOrden(OrdenLaboratorio orden)
+        {
+            Console.WriteLine("\n--- RESUMEN DE LA ORDEN ---");
+            Console.WriteLine($"Número de Orden: {orden.IdOrden}");
+            Console.WriteLine($"Fecha Programada: {orden.FechaProgramada:yyyy-MM-dd}");
+            Console.WriteLine($"ID Paciente: {orden.IdPaciente}");
+            Console.WriteLine($"Área: {orden.Area}");
+            Console.WriteLine($"Servicio: {orden.Servicio}");
+            Console.WriteLine($"ID Médico: {orden.IdMedico}");
+            Console.WriteLine("Exámenes:");
+            orden.Examenes.ForEach(e => Console.WriteLine($"- {e}"));
+            Console.WriteLine($"Observación: {orden.Observacion}\n");
         }
 
         private void GestionPacientes()
