@@ -1,4 +1,4 @@
-﻿using PrySistemaLaboratorio.Interfaces;
+﻿
 using PrySistemaLaboratorio.Models;
 using PrySistemaLaboratorio.Reposotories;
 using PrySistemaLaboratorio.Services;

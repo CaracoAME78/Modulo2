@@ -21,9 +21,7 @@ namespace PrySistemaLaboratorio.UI
 
         public void Run()
         {
-            Console.Clear();
-            Console.WriteLine("=== SISTEMA DE GESTIÓN DE PACIENTES Y LABORATORIO ===");
-
+            
             while (_isRuning) 
             {
                 DispalMenuPrincipal();
@@ -38,7 +36,7 @@ namespace PrySistemaLaboratorio.UI
                         GestionLaboratorio();
                         break;
 
-                    case "3":
+                    case "0":
                         _isRuning = false;
                         Console.WriteLine("Gracias por usar el sistema de laboratorio.");
                         break;
@@ -49,6 +47,11 @@ namespace PrySistemaLaboratorio.UI
                 }
 
             }
+        }
+
+        private void GestionLaboratorio()
+        {
+            throw new NotImplementedException();
         }
 
         private void GestionPacientes()
@@ -112,27 +115,44 @@ namespace PrySistemaLaboratorio.UI
         {
             Console.Clear();
             Console.Write("Ingrese el Celular del paciente a listar: ");
-            string id = Console.ReadLine();
-            Paciente _paciente = _pacienteService.GetPacienteByPhoneNumber(id);
+            string celular = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByPhoneNumber(celular);
             Console.Write(_paciente.ToString());
+            Console.ReadKey();
         }
 
         private void BuscarPacientePorEmail()
         {
             Console.Clear();
             Console.Write("Ingrese el Correo del paciente a listar: ");
-            string id = Console.ReadLine();
-            Paciente _paciente = _pacienteService.GetPacienteByEmail(id);
-            Console.Write(_paciente.ToString());
+            string correo = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByEmail(correo);
+            if (_paciente != null)
+            {
+                Console.Write(_paciente.ToString());
+            }
+            else
+            {
+                Console.Write("El paciente no se encontro bajo este criterio.");
+            }
+            Console.ReadKey();
         }
 
         private void BuscarPacientePorDNI()
         {
             Console.Clear();
             Console.Write("Ingrese el DNI del paciente a listar: ");
-            string id = Console.ReadLine();
-            Paciente _paciente = _pacienteService.GetPacienteByDni(id);
-            Console.Write(_paciente.ToString());
+            string dni = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByDni(dni);
+            if (_paciente != null)
+            {
+                Console.Write(_paciente.ToString());
+            }
+            else
+            {
+                Console.Write("El paciente no se encontro bajo este criterio.");
+            }
+            Console.ReadKey();
         }
 
         private void BuscarPacientePorId()
@@ -141,17 +161,38 @@ namespace PrySistemaLaboratorio.UI
             Console.Write("Ingrese ID del paciente a listar: ");
             string id = Console.ReadLine();
             Paciente _paciente = _pacienteService.GetPacienteById(id);
-            Console.Write( _paciente.ToString());
+            if (_paciente != null)
+            {
+                Console.Write(_paciente.ToString());
+            }
+            else
+            {
+                Console.Write("El paciente no se encontro bajo este criterio.");
+            }
+            Console.ReadKey();
         }
 
         private void ListarPacientes()
         {
-            var pacientes = _pacienteService.GetPacientes();
-
-            foreach (var paciente in pacientes)
+            var _pacientes = _pacienteService.GetPacientes();
+            if (_pacientes != null)
             {
-                Console.WriteLine(paciente);
+                Console.WriteLine("Lista de Pacientes");
+                Console.WriteLine("==================");
+
+                foreach (var paciente in _pacientes)
+                {
+                    Console.WriteLine(paciente);
+                }
             }
+            else
+            {
+                Console.Write("El paciente no se encontro bajo este criterio.");
+            }
+            Console.ReadKey();
+
+            
+
         }
 
         private void EliminarPaciente()
@@ -180,8 +221,9 @@ namespace PrySistemaLaboratorio.UI
                 {
                     Console.WriteLine("Paciente no fue Eliminado - Ocurrio un Error.");
                 }
-                Console.ReadKey();
+                
             }
+            Console.ReadKey();
 
 
         }
@@ -193,7 +235,7 @@ namespace PrySistemaLaboratorio.UI
             string id = Console.ReadLine();
 
             Paciente _paciente = _pacienteService.GetPacienteById(id);
-            if (paciente == null)
+            if (_paciente == null)
             {
                 Console.WriteLine("Paciente no encontrado.");
                 Console.ReadKey();
@@ -258,8 +300,8 @@ namespace PrySistemaLaboratorio.UI
 
             Console.Write("Nombres: ");
             _paciente.Nombres = Console.ReadLine();
-
-
+             
+            
             Console.Write("Apellido Paterno: ");
             _paciente.ApellidoPaterno = Console.ReadLine();
 
@@ -272,6 +314,10 @@ namespace PrySistemaLaboratorio.UI
 
             Console.Write("DNI: ");
             _paciente.Dni = Console.ReadLine();
+            if (_paciente.Dni == null)
+            {
+                _paciente.Dni = "";
+            }
 
             do
             {
@@ -309,9 +355,19 @@ namespace PrySistemaLaboratorio.UI
 
             Console.Write("Celular: ");
             _paciente.Celular = Console.ReadLine();
+            if (_paciente.Celular == null)
+            {
+                _paciente.Celular = "";
+            }
+
 
             Console.Write("Correo Electrónico: ");
             _paciente.Correo = Console.ReadLine();
+            if (_paciente.Correo == null)
+            {
+                _paciente.Correo = "";
+            }
+
 
             var confirmation = _pacienteService.CrearPaciente(_paciente);
 
@@ -323,11 +379,13 @@ namespace PrySistemaLaboratorio.UI
             {
                 Console.WriteLine("Paciente no fue creado - Ocurrio un Error.");
             }
-
+            Console.ReadKey();
         }
 
         private void DispalMenuPrincipal()
         {
+            Console.Clear();
+            Console.WriteLine("=== SISTEMA DE GESTIÓN DE PACIENTES Y LABORATORIO ===");
             Console.WriteLine("1. Gestión de Pacientes");
             Console.WriteLine("2. Gestión de Laboratorio (por implementar)");
             Console.WriteLine("0. Salir");

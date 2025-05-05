@@ -12,7 +12,7 @@ namespace PrySistemaLaboratorio.Services
         bool CrearPaciente(Paciente paciente);
         bool ModificarPaciente( Paciente paciente);
         bool EliminarPaciente(Paciente paciente);
-        Paciente GetPacienteById(int id);
+        Paciente GetPacienteById(string id);
         List<Paciente> GetPacientes();
         Paciente GetPacienteByDni(string dni);
         Paciente GetPacienteByEmail(string email);

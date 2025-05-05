@@ -12,15 +12,12 @@ namespace PrySistemaLaboratorio.Reposotories
     {
         private List<Paciente> _pacientes = new List<Paciente>();
         private static Dictionary<string, int> correlativos = new Dictionary<string, int>();
+       
 
-        public List<Paciente> Getall()
-        {
-            return _pacientes;
-        }
 
         public Paciente GetById(String id)
         {
-            return _pacientes.FirstOrDefault(x=x =>x.Id==id);
+            return _pacientes.FirstOrDefault(x => x.Id == id);
         }
 
         public void Add (Paciente entity)
@@ -54,22 +51,28 @@ namespace PrySistemaLaboratorio.Reposotories
             _pacientes.Remove(entity);
         }
 
-
+       
         public Paciente GetByDni(string dni)
         {
-            return _pacientes.FirstOrDefault(x = x => x.Dni == dni);
+            return _pacientes.FirstOrDefault(x => x.Dni == dni);
+
+            
         }
 
         public Paciente GetByEmail(string email)
         {
-            return _pacientes.FirstOrDefault(x = x => x.Correo == email);
+            return _pacientes.FirstOrDefault( x => x.Correo == email);
+            
         }
 
         public Paciente GetByPhoneNumber(string phoneNumber)
         {
-            return _pacientes.FirstOrDefault(x = x => x.Celular == phoneNumber);
+            return _pacientes.FirstOrDefault(x => x.Celular == phoneNumber);
+
         }
-
-
+        public List<Paciente> GetAll()
+        {
+            return _pacientes;
+        }
     }
 }

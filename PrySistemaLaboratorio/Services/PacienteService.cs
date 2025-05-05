@@ -71,10 +71,6 @@ namespace PrySistemaLaboratorio.Services
             return _pacienteRepositorio.GetByEmail(email);
         }
 
-        public Paciente GetPacienteById(int id)
-        {
-            return _pacienteRepositorio.GetById(id);
-        }
 
         public Paciente GetPacienteByPhoneNumber(string phoneNumber)
         {
@@ -86,6 +82,10 @@ namespace PrySistemaLaboratorio.Services
             return _pacienteRepositorio.GetAll();
         }
 
-       
+        public Paciente GetPacienteById(string id)
+        {
+            return _pacienteRepositorio.GetById(id);
+        }
+
     }
 }
