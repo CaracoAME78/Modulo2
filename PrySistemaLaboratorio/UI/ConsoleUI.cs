@@ -107,6 +107,98 @@ namespace PrySistemaLaboratorio.UI
             }
         }
 
+        private void ListarOrdenesPorFecha()
+        {
+            Console.Clear();
+            Console.WriteLine("Listar Ordenes por Fecha");
+            Console.WriteLine("========================");
+            Console.WriteLine("");
+           
+            Console.Write("Ingrese la fecha (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
+            {
+                Console.WriteLine("Fecha inválida.");
+                return;
+            }
+
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByFecha( fecha);
+            if (_ordenes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Ordenes por Fecha");
+                Console.WriteLine("==========================");
+                ImprimirTitulosOrden();
+                foreach (var orden in _ordenes)
+                {
+                    Console.WriteLine(orden);
+                }
+            }
+            else
+            {
+                Console.Write("Las Ordenes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+
+        }
+
+        private void ListarOrdenesPorPaciente()
+        {
+            Console.Clear();
+            Console.WriteLine("Listar Ordenes por Paciente");
+            Console.WriteLine("===========================");
+            Console.WriteLine("");
+            Console.WriteLine("Ingrese el ID del Paciente:");
+            string idpaciente = Console.ReadLine();
+
+
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByIdPaciente(idpaciente);
+            if (_ordenes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Ordenes por Paciente");
+                Console.WriteLine("=============================");
+                ImprimirTitulosOrden();
+                foreach (var orden in _ordenes)
+                {
+                    Console.WriteLine(orden);
+                }
+            }
+            else
+            {
+                Console.Write("Las Ordenes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+        }
+
+        private void ListarOrdenesPorMedico()
+        {
+            Console.Clear();
+            Console.WriteLine("Listar Ordenes por Medico");
+            Console.WriteLine("=========================");
+            Console.WriteLine("");
+            Console.WriteLine("Ingrese el ID del Medico:");
+            string idmedico = Console.ReadLine();
+
+
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByIdMedico(idmedico);
+            if (_ordenes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Ordenes por Medico");
+                Console.WriteLine("===========================");
+                ImprimirTitulosOrden();
+                foreach (var orden in _ordenes)
+                {
+                    Console.WriteLine(orden);
+                }
+            }
+            else
+            {
+                Console.Write("Las Ordenes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+        }
+
         private void ListarOrdenesPorServicioFecha()
         {
             Console.Clear();
@@ -125,7 +217,7 @@ namespace PrySistemaLaboratorio.UI
                 return;
             }
 
-            Servicio servicio = (Servicio)servicioSeleccionado;
+            Servicio _servicio = (Servicio)servicioSeleccionado;
 
             Console.Write("Ingrese la fecha (yyyy-MM-dd): ");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
@@ -134,7 +226,7 @@ namespace PrySistemaLaboratorio.UI
                 return;
             }
 
-            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByServicio(servicio, fecha);
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByServicio(_servicio, fecha);
             if (_ordenes != null)
             {
                 Console.Clear();
@@ -148,9 +240,18 @@ namespace PrySistemaLaboratorio.UI
             }
             else
             {
-                Console.Write("Los pacientes no se encontraron bajo este criterio.");
+                Console.Write("Las Ordenes no se encontraron bajo este criterio.");
             }
             Console.ReadKey();
+
+        }
+
+        private void ImprimirTitulosOrden()
+        {
+            Console.WriteLine();
+            Console.WriteLine("================================================================================================================");
+            Console.WriteLine("   ID Orden     ID Paciente   Fecha Programada    Area     Servicio     ID Medico     Observación");
+            Console.WriteLine("================================================================================================================");
 
         }
 
@@ -172,7 +273,7 @@ namespace PrySistemaLaboratorio.UI
                 return;
             }
 
-            Area area = (Area)areaSeleccionada;
+            Area _area = (Area)areaSeleccionada;
 
             Console.Write("Ingrese la fecha (yyyy-MM-dd): ");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime fecha))
@@ -181,7 +282,7 @@ namespace PrySistemaLaboratorio.UI
                 return;
             }
 
-            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByArea(area, fecha);
+            var _ordenes = _ordenLaboratorioService.GetOrdenLaboratorioByArea(_area, fecha);
             if (_ordenes != null)
             {
                 Console.Clear();
@@ -195,7 +296,7 @@ namespace PrySistemaLaboratorio.UI
             }
             else
             {
-                Console.Write("Los pacientes no se encontraron bajo este criterio.");
+                Console.Write("Las Ordenes no se encontraron bajo este criterio.");
             }
             Console.ReadKey();
 

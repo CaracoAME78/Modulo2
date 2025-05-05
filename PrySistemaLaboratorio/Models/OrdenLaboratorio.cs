@@ -16,5 +16,11 @@ namespace PrySistemaLaboratorio.Models
         public string IdMedico { get; set; }
         public List<Examen> Examenes { get; set; } = new List<Examen>();
         public string Observacion { get; set; }
+
+        public override string ToString()
+        {
+            return $"=> {IdOrden}  {IdPaciente}  {FechaProgramada} {Area} {Servicio}  {IdMedico}  {Observacion}";
+        }
+
     }
 }
