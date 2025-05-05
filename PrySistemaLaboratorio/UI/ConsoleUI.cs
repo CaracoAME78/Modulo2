@@ -53,7 +53,55 @@ namespace PrySistemaLaboratorio.UI
 
         private void GestionLaboratorio()
         {
-            throw new NotImplementedException();
+            bool volver = false;
+
+            while (!volver)
+            {
+                Console.Clear();
+                Console.WriteLine("=== GESTIÓN DE LABORATORIO ===");
+                Console.WriteLine("1. Registrar Orden de Laboratorio");
+                Console.WriteLine("2. Buscar Orden por Id");
+                Console.WriteLine("3. Listar Ordenes por Area y Fecha");
+                Console.WriteLine("4. Listar Ordenes por Servicio y Fecha");
+                Console.WriteLine("5. Listar Ordenes por Medico");
+                Console.WriteLine("6. Listar Ordenes por Paciente");
+                Console.WriteLine("7. Listar Ordenes por Fecha");
+                Console.WriteLine("0. Volver");
+                Console.Write("Seleccione una opción: ");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        AgregarOrdenLaboratorio();
+                        break;
+                    case "2":
+                        BuscarOrdenPorId();
+                        break;
+                    case "3":
+                        ListarOrdenesPorAreaFecha();
+                        break;
+                    case "4":
+                        ListarOrdenesPorServicioFecha();
+                        break;
+                    case "5":
+                        ListarOrdenesPorMedico();
+                        break;
+                    case "6":
+                        ListarOrdenesPorPaciente();
+                        break;
+                    case "7":
+                        ListarOrdenesPorFecha();
+                        break;
+                    case "0":
+                        volver = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opción inválida.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
         }
 
         private void GestionPacientes()
