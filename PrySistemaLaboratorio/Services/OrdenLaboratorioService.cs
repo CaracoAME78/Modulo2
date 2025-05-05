@@ -19,7 +19,17 @@ namespace PrySistemaLaboratorio.Services
 
         public bool CrearOrden(OrdenLaboratorio orden)
         {
-            _ordenLaboratorioRepositorio.Add(orden);
+            try
+            {
+                _ordenLaboratorioRepositorio.Add(orden);
+                return true;
+            }
+            catch (Exception e )
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
 
         public List<OrdenLaboratorio> GetOrdenLaboratorioByArea(Area area, DateTime fecha)
