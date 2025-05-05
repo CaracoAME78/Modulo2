@@ -8,7 +8,7 @@ namespace PrySistemaLaboratorio.Models
 {
     internal abstract class Persona
     {
-        public string Id { get; protected set; }
+        public string Id { get;  set; }
         public string Nombres { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
