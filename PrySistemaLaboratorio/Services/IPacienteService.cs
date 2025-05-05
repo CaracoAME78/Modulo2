@@ -9,6 +9,7 @@ namespace PrySistemaLaboratorio.Services
 {
     internal interface IPacienteService
     {
+        bool CrearPaciente(Paciente paciente);
         Paciente GetPacienteById(int id);
         List<Paciente> GetPacientes();
         Paciente GetPacienteByDni(string dni);

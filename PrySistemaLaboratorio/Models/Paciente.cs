@@ -11,6 +11,10 @@ namespace PrySistemaLaboratorio.Models
     {
         public bool Activo { get; set; }
 
+        public Paciente()
+        {
+
+        }
         public Paciente(string nombres, string apePat, string apeMat, DateTime fechaNacimiento, string dni, Sexo sexo, string direccion, string celular, string correo)
         {
             this.Id = GeneradorIdPaciente.GenerarId();
