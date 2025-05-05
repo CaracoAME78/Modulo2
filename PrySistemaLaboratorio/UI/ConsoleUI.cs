@@ -108,6 +108,38 @@ namespace PrySistemaLaboratorio.UI
             }
         }
 
+        private void EliminarPaciente()
+        {
+            Console.Clear();
+            Console.Write("Ingrese ID del paciente a eliminar: ");
+            string id = Console.ReadLine();
+
+            Paciente _paciente = _pacienteService.GetPacienteById(id);
+
+            if (_paciente == null)
+            {
+                Console.WriteLine("Paciente no encontrado.");
+                return; 
+            }
+            else
+            {
+                
+                var confirmation = _pacienteService.EliminarPaciente(_paciente);
+
+                if (confirmation)
+                {
+                    Console.WriteLine("Paciente fue Eliminado satisfactoriamente!");
+                }
+                else
+                {
+                    Console.WriteLine("Paciente no fue Eliminado - Ocurrio un Error.");
+                }
+                Console.ReadKey();
+            }
+
+
+        }
+
         private void ModificarPaciente()
         {
             Console.Clear();

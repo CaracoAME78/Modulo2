@@ -46,6 +46,21 @@ namespace PrySistemaLaboratorio.Services
             }
         }
 
+        public bool EliminarPaciente(Paciente paciente)
+        {
+            try
+            {
+                _pacienteRepositorio.Delete(paciente);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+
         public Paciente GetPacienteByDni(string dni)
         {
             return _pacienteRepositorio.GetByDni(dni);
@@ -71,6 +86,6 @@ namespace PrySistemaLaboratorio.Services
             return _pacienteRepositorio.GetAll();
         }
 
-        
+       
     }
 }
