@@ -108,6 +108,52 @@ namespace PrySistemaLaboratorio.UI
             }
         }
 
+        private void BuscarPacientePorCelular()
+        {
+            Console.Clear();
+            Console.Write("Ingrese el Celular del paciente a listar: ");
+            string id = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByPhoneNumber(id);
+            Console.Write(_paciente.ToString());
+        }
+
+        private void BuscarPacientePorEmail()
+        {
+            Console.Clear();
+            Console.Write("Ingrese el Correo del paciente a listar: ");
+            string id = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByEmail(id);
+            Console.Write(_paciente.ToString());
+        }
+
+        private void BuscarPacientePorDNI()
+        {
+            Console.Clear();
+            Console.Write("Ingrese el DNI del paciente a listar: ");
+            string id = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteByDni(id);
+            Console.Write(_paciente.ToString());
+        }
+
+        private void BuscarPacientePorId()
+        {
+            Console.Clear();
+            Console.Write("Ingrese ID del paciente a listar: ");
+            string id = Console.ReadLine();
+            Paciente _paciente = _pacienteService.GetPacienteById(id);
+            Console.Write( _paciente.ToString());
+        }
+
+        private void ListarPacientes()
+        {
+            var pacientes = _pacienteService.GetPacientes();
+
+            foreach (var paciente in pacientes)
+            {
+                Console.WriteLine(paciente);
+            }
+        }
+
         private void EliminarPaciente()
         {
             Console.Clear();

@@ -9,15 +9,13 @@ namespace PrySistemaLaboratorio.Models
 {
     internal class Paciente : Persona
     {
-        public bool Activo { get; set; }
-
+        
         public Paciente()
         {
 
         }
         public Paciente(string nombres, string apePat, string apeMat, DateTime fechaNacimiento, string dni, Sexo sexo, string direccion, string celular, string correo)
         {
-            this.Id = GeneradorIdPaciente.GenerarId();
             this.Nombres = nombres;
             this.ApellidoPaterno = apePat;
             this.ApellidoMaterno = apeMat;
@@ -27,7 +25,13 @@ namespace PrySistemaLaboratorio.Models
             this.Direccion = direccion;
             this.Celular = celular;
             this.Correo = correo;
-            this.Activo = true;
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Nombres: {Nombres}, Apellido Paterno: {ApellidoPaterno}, Apellido Materno: {ApellidoMaterno}, Fecha de nacimiento : {FechaNacimiento}" +
+                $", Sexo: {Sexo}, Celular: {Celular}, Correo: {Correo}";
+        }
+
     }
 }
