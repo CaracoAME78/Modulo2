@@ -32,6 +32,20 @@ namespace PrySistemaLaboratorio.Services
             }
         }
 
+        public bool ModificarPaciente( Paciente paciente)
+        {
+            try
+            {
+                _pacienteRepositorio.Update(paciente);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
         public Paciente GetPacienteByDni(string dni)
         {
             return _pacienteRepositorio.GetByDni(dni);
@@ -56,5 +70,7 @@ namespace PrySistemaLaboratorio.Services
         {
             return _pacienteRepositorio.GetAll();
         }
+
+        
     }
 }

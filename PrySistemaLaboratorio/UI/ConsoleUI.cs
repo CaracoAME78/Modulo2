@@ -108,6 +108,66 @@ namespace PrySistemaLaboratorio.UI
             }
         }
 
+        private void ModificarPaciente()
+        {
+            Console.Clear();
+            Console.Write("Ingrese ID del paciente a modificar: ");
+            string id = Console.ReadLine();
+
+            Paciente _paciente = _pacienteService.GetPacienteById(id);
+            if (paciente == null)
+            {
+                Console.WriteLine("Paciente no encontrado.");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write($"Nombres ({_paciente.Nombres}): ");
+            string nombres = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(nombres)) _paciente.Nombres = nombres;
+
+            Console.Write($"Apellido Paterno ({_paciente.ApellidoPaterno}): ");
+            string apePat = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(apePat)) _paciente.ApellidoPaterno = apePat;
+
+            Console.Write($"Apellido Materno ({_paciente.ApellidoMaterno}): ");
+            string apeMat = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(apeMat)) _paciente.ApellidoMaterno = apeMat;
+
+            Console.Write($"Fecha de Nacimiento ({_paciente.FechaNacimiento}): ");
+            string entradaFecha = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(entradaFecha) && DateTime.TryParse(entradaFecha, out DateTime nuevaFecha))
+            {
+                _paciente.FechaNacimiento = nuevaFecha;
+            }
+
+            Console.Write($"Dirección ({_paciente.Direccion}): ");
+            string direccion = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(direccion)) _paciente.Direccion = direccion;
+
+            Console.Write($"Celular ({_paciente.Celular}): ");
+            string celular = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(celular)) _paciente.Celular = celular;
+
+            Console.Write($"Correo ({_paciente.Correo}): ");
+            string correo = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(correo)) _paciente.Correo = correo;
+
+            
+            var confirmation = _pacienteService.ModificarPaciente(_paciente);
+
+            if (confirmation)
+            {
+                Console.WriteLine($"Paciente fue modificado satisfactoriamente!  ID: {_paciente.Id}");
+            }
+            else
+            {
+                Console.WriteLine("Paciente no fue modificado - Ocurrio un Error.");
+            }
+             Console.ReadKey();
+        }
+
         private void AgregarPaciente()
         {
             bool sexoValido = false;
