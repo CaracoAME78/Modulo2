@@ -29,8 +29,7 @@ namespace PrySistemaLaboratorio.Models
 
         public override string ToString()
         {
-            return $"Id: {Id}, Nombres: {Nombres}, Apellido Paterno: {ApellidoPaterno}, Apellido Materno: {ApellidoMaterno}, Fecha de nacimiento : {FechaNacimiento}" +
-                $", Sexo: {Sexo}, Celular: {Celular}, Correo: {Correo}";
+            return $"=> {Id}  {Nombres}  {ApellidoPaterno} {ApellidoMaterno} {FechaNacimiento}  {Sexo}  {Celular}  {Correo}";
         }
 
     }
