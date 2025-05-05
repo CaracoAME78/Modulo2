@@ -325,7 +325,7 @@ namespace PrySistemaLaboratorio.UI
 
         private void AgregarOrdenLaboratorio()
         {
-            Console.WriteLine("=== Registro de Orden de Laboratorio ===")
+            Console.WriteLine("=== Registro de Orden de Laboratorio ===");
             Console.WriteLine();
             Console.WriteLine("Fecha de Registro : " + DateTime.Today.ToString());
             Console.Write("Ingrese DNI del paciente: ");
@@ -350,7 +350,7 @@ namespace PrySistemaLaboratorio.UI
 
             Servicio servicioSeleccionado = (Servicio)int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Seleccione un médico:");
+            Console.WriteLine("Seleccione un médico (Registre el Código Completo):");
             var medicos = _medicoService.GetMedicos();
             foreach (var med in medicos)
                 Console.WriteLine($"{med.Id}. {med.Nombres} {med.ApellidoPaterno} {med.ApellidoMaterno}");
@@ -371,7 +371,9 @@ namespace PrySistemaLaboratorio.UI
             Console.Write("Observación: ");
             string observacion = Console.ReadLine();
 
-            var orden = new OrdenLaboratorio
+            Console.WriteLine(medicoSeleccionado.Id);
+           
+            var orden = new OrdenLaboratorio ()
             {
                 IdPaciente = paciente.Id,
                 FechaProgramada = fechaProgramada,
@@ -381,8 +383,20 @@ namespace PrySistemaLaboratorio.UI
                 Examenes = examenesSeleccionados,
                 Observacion = observacion
             };
+            
 
-            _ordenLaboratorioService.CrearOrden(orden);
+            var confirmation = _ordenLaboratorioService.CrearOrden(orden);
+
+            if (confirmation)
+            {
+                Console.WriteLine($"Paciente fue creado satisfactoriamente!  ID: {orden.IdOrden}");
+            }
+            else
+            {
+                Console.WriteLine("Paciente no fue creado - Ocurrio un Error.");
+            }
+
+
             MostrarResumenOrden(orden);
 
         }
@@ -399,6 +413,7 @@ namespace PrySistemaLaboratorio.UI
             Console.WriteLine("Exámenes:");
             orden.Examenes.ForEach(e => Console.WriteLine($"- {e}"));
             Console.WriteLine($"Observación: {orden.Observacion}\n");
+            Console.ReadKey();
         }
 
         private void GestionPacientes()
@@ -561,6 +576,25 @@ namespace PrySistemaLaboratorio.UI
                 Console.Write("Los pacientes no se encontraron bajo este criterio.");
             }
             Console.ReadKey();
+
+            var _medicos = _medicoService.GetMedicos();
+            if (_medicos != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de Pacientes");
+                Console.WriteLine("==================");
+                ImprimirTitulos();
+                foreach (var medico in _medicos)
+                {
+                    Console.WriteLine(medico);
+                }
+            }
+            else
+            {
+                Console.Write("Los pacientes no se encontraron bajo este criterio.");
+            }
+            Console.ReadKey();
+
 
 
         }

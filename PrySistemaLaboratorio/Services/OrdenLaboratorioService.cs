@@ -34,7 +34,7 @@ namespace PrySistemaLaboratorio.Services
 
         public List<OrdenLaboratorio> GetOrdenLaboratorioByArea(Area area, DateTime fecha)
         {
-            return _ordenLaboratorioRepositorio.GetOrdenLaboratorioByArea(area,fecha)
+            return _ordenLaboratorioRepositorio.GetOrdenLaboratorioByArea(area, fecha);
         }
 
         public List<OrdenLaboratorio> GetOrdenLaboratorioByFecha(DateTime fecha)

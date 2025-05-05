@@ -13,8 +13,10 @@ namespace PrySistemaLaboratorio.Models
         {
 
         }
-        public Medico(string nombres, string apePat, string apeMat, DateTime fechaNacimiento, string dni, Sexo sexo, string direccion, string celular, string correo)
+
+        public Medico(String id, string nombres, string apePat, string apeMat, DateTime fechaNacimiento, string dni, Sexo sexo, string direccion, string celular, string correo)
         {
+            this.Id = id;   
             this.Nombres = nombres;
             this.ApellidoPaterno = apePat;
             this.ApellidoMaterno = apeMat;

@@ -11,31 +11,56 @@ namespace PrySistemaLaboratorio.Reposotories
     internal class MedicoRepositorio : IMedicoRepositorio
     {
         private List<Medico> _medicos = new List<Medico>();
-        private static Dictionary<string, int> correlativos = new Dictionary<string, int>();
+        private static Dictionary<string, int> correlativosMed = new Dictionary<string, int>();
 
         public MedicoRepositorio()
         {
-            _medicos.Add(new Medico() { Nombres = "Juan", ApellidoPaterno="Garcia", ApellidoMaterno="Lozano", Dni ="40051421", Sexo=Sexo.Masculino, Celular="999999999",Correo="JGarcia@corre.com"});
-            _medicos.Add(new Medico() { Nombres = "Maria", ApellidoPaterno = "Valcarcel", ApellidoMaterno = "Perez", Dni = "40051420", Sexo = Sexo.Femenino, Celular = "999999888", Correo = "Mvarcal@corre.com" });
-            _medicos.Add(new Medico() { Nombres = "Jose", ApellidoPaterno = "Espinoza", ApellidoMaterno = "Ramos", Dni = "10051421", Sexo = Sexo.Masculino, Celular = "777999999", Correo = "Jespinoza@corre.com" });
-            _medicos.Add(new Medico() { Nombres = "Willy", ApellidoPaterno = "Moreno", ApellidoMaterno = "Diaz", Dni = "20051421", Sexo = Sexo.Masculino, Celular = "999555999", Correo = "Wmoreno@corre.com" });
-            _medicos.Add(new Medico() { Nombres = "Betzabeth", ApellidoPaterno = "Rios", ApellidoMaterno = "Valenzuela", Dni = "10051101", Sexo = Sexo.Femenino, Celular = "994449999", Correo = "Brios@corre.com" });
+            string id;
+            id= this.GeneraId();
+            _medicos.Add(new Medico() { Id = id , Nombres = "Juan", ApellidoPaterno="Garcia", ApellidoMaterno="Lozano", Dni ="40051421", Sexo=Sexo.Masculino, Celular="999999999",Correo="JGarcia@corre.com"});
+            id = this.GeneraId();
+            _medicos.Add(new Medico() { Id = id, Nombres = "Maria", ApellidoPaterno = "Valcarcel", ApellidoMaterno = "Perez", Dni = "40051420", Sexo = Sexo.Femenino, Celular = "999999888", Correo = "Mvarcal@corre.com" });
+            id = this.GeneraId();
+            _medicos.Add(new Medico() { Id = id, Nombres = "Jose", ApellidoPaterno = "Espinoza", ApellidoMaterno = "Ramos", Dni = "10051421", Sexo = Sexo.Masculino, Celular = "777999999", Correo = "Jespinoza@corre.com" });
+            id = this.GeneraId();
+            _medicos.Add(new Medico() { Id = id, Nombres = "Willy", ApellidoPaterno = "Moreno", ApellidoMaterno = "Diaz", Dni = "20051421", Sexo = Sexo.Masculino, Celular = "999555999", Correo = "Wmoreno@corre.com" });
+            id = this.GeneraId();
+            _medicos.Add(new Medico() { Id = id, Nombres = "Betzabeth", ApellidoPaterno = "Rios", ApellidoMaterno = "Valenzuela", Dni = "10051101", Sexo = Sexo.Femenino, Celular = "994449999", Correo = "Brios@corre.com" });
 
         }
+
+        public string GeneraId()
+        {
+            string yy = DateTime.Now.ToString("yy");
+            string mm = DateTime.Now.ToString("MM");
+            string clave = yy + mm;
+
+            if (!correlativosMed.ContainsKey(clave))
+                correlativosMed[clave] = 1;
+            else
+                correlativosMed[clave]++;
+
+            return $"M{yy}{mm}{correlativosMed[clave].ToString("D3")}";
+
+        }
+
         public void Add(Medico entity)
         {
             string yy = DateTime.Now.ToString("yy");
             string mm = DateTime.Now.ToString("MM");
             string clave = yy + mm;
 
-            if (!correlativos.ContainsKey(clave))
-                correlativos[clave] = 1;
+            if (!correlativosMed.ContainsKey(clave))
+                correlativosMed[clave] = 1;
             else
-                correlativos[clave]++;
+                correlativosMed[clave]++;
 
-            entity.Id = $"M{yy}{mm}{correlativos[clave].ToString("D3")}";
+            entity.Id = $"M{yy}{mm}{correlativosMed[clave].ToString("D3")}";
 
             _medicos.Add(entity);
+
+
+
         }
 
         public void Delete(Medico entity)
