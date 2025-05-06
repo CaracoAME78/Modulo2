@@ -577,23 +577,7 @@ namespace PrySistemaLaboratorio.UI
             }
             Console.ReadKey();
 
-            var _medicos = _medicoService.GetMedicos();
-            if (_medicos != null)
-            {
-                Console.Clear();
-                Console.WriteLine("Lista de Pacientes");
-                Console.WriteLine("==================");
-                ImprimirTitulos();
-                foreach (var medico in _medicos)
-                {
-                    Console.WriteLine(medico);
-                }
-            }
-            else
-            {
-                Console.Write("Los pacientes no se encontraron bajo este criterio.");
-            }
-            Console.ReadKey();
+           
 
 
 
